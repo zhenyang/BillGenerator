@@ -43,4 +43,18 @@ public class BillGeneratorTest {
     public void should_calculate_price_when_shopping_list_has_three_same_goods() throws Exception {
         assertThat(billGenerator.calculateBill(SHOPPING_LIST_AAA), equalTo(130));
     }
+    @Test
+    public void should_calculate_price_when_shopping_list_has_four_same_goods() throws Exception {
+        assertThat(billGenerator.calculateBill("AAAA"), equalTo(180));
+    }
+
+    @Test
+    public void should_calculate_price_when_shopping_list_has_three_same_goods_b() throws Exception {
+        assertThat(billGenerator.calculateBill("BB"), equalTo(45));
+    }
+
+//    @Test
+//    public void should_calculate_price_when_shopping_list_has_three_same_goods_c() throws Exception {
+//        assertThat(billGenerator.calculateBill("CCCC"), equalTo(0));
+//    }
 }

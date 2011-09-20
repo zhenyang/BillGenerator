@@ -2,22 +2,22 @@ import java.util.ArrayList;
 
 public class BillGenerator {
 
-    private Parser parser;
-
     public BillGenerator() {
-        parser = new Parser();
     }
 
     public int calculateBill(String shoppingList) {
-        ArrayList<Good> goods = parser.parseGoods(shoppingList);
-        return totalPrice(goods);
+        ArrayList<DiscountRule> discounts = prepareDiscountRoles();
+        Clerk clerk = new Clerk(discounts);
+        return clerk.discount(new Goods(shoppingList)).getPrice();
     }
 
-    private int totalPrice(ArrayList<Good> goods) {
-        int totalPrice = 0;
-        for (Good good : goods) {
-            totalPrice += good.getPrice();
-        }
-        return totalPrice;
+    private ArrayList<DiscountRule> prepareDiscountRoles() {
+        DiscountRule ruleForA = new DiscountRule("A", 3, -20);
+        DiscountRule ruleForB = new DiscountRule("B", 2, -15);
+        ArrayList<DiscountRule> discounts = new ArrayList<DiscountRule>();
+        discounts.add(ruleForA);
+        discounts.add(ruleForB);
+        return discounts;
     }
+
 }
