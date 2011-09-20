@@ -19,5 +19,4 @@ public class BillGenerator {
         discounts.add(ruleForB);
         return discounts;
     }
-
 }

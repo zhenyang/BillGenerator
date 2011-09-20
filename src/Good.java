@@ -1,4 +1,4 @@
-class Good {
+public class Good {
     private int price;
     private String name;
 
