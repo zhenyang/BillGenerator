@@ -25,8 +25,23 @@ public class BillGeneratorTest {
     }
 
     @Test
-    public void should_calculate_price_when_shopping_list_has_only_one_good() throws Exception {
+    public void should_calculate_price_when_shopping_list_has_only_one_A() throws Exception {
         assertThat(billGenerator.calculateBill(SHOPPING_LIST_A), equalTo(50));
+    }
+
+    @Test
+    public void should_calculate_price_when_shopping_list_has_only_one_B() throws Exception {
+        assertThat(billGenerator.calculateBill("B"), equalTo(30));
+    }
+
+    @Test
+    public void should_calculate_price_when_shopping_list_has_only_one_C() throws Exception {
+        assertThat(billGenerator.calculateBill("C"), equalTo(20));
+    }
+
+    @Test
+    public void should_calculate_price_when_shopping_list_has_only_one_D() throws Exception {
+        assertThat(billGenerator.calculateBill("D"), equalTo(15));
     }
 
     @Test

@@ -1,53 +1,20 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Clerk {
-
-    private ArrayList<DiscountRule> discountRules;
+    List<DiscountRule> rules;
 
     public Clerk() {
-        discountRules = new ArrayList<DiscountRule>();
-        discountRules.add(new DiscountRule("A", 3, -20));
-        discountRules.add(new DiscountRule("B", 2, -15));
+        rules = new ArrayList<DiscountRule>();
+        rules.add(new DiscountRule("A", 3, -20));
+        rules.add(new DiscountRule("B", 2, -15));
     }
 
     public Goods discount(Goods goods) {
-        Goods goodsAfterDiscount = goods.copy();
-        for (DiscountRule rule : discountRules) {
-            goodsAfterDiscount = discountGoodsByRule(goodsAfterDiscount, rule);
-        }
-        return goodsAfterDiscount;
-    }
-
-    private Goods discountGoodsByRule(Goods goods, DiscountRule rule) {
         Goods result = goods.copy();
-        int count = result.count(GoodFactory.create(rule.getName()));
-        for (int i = 0; i < count / rule.getCount(); i++) {
-            result.addGood(new Good(rule.getPriceOff()));
+        for (DiscountRule rule : rules) {
+            result = rule.discount(result);
         }
         return result;
-    }
-
-    private class DiscountRule {
-        private String name;
-        private int count;
-        private int priceOff;
-
-        public DiscountRule(String name, int count, int priceOff) {
-            this.name = name;
-            this.count = count;
-            this.priceOff = priceOff;
-        }
-
-        public int getPriceOff() {
-            return priceOff;
-        }
-
-        public int getCount() {
-            return count;
-        }
-
-        public String getName() {
-            return name;
-        }
     }
 }

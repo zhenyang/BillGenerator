@@ -1,54 +1,41 @@
-import java.util.ArrayList;
+import java.util.List;
 
 public class Goods {
-
-    private ArrayList<Good> goods;
+    private List<Good> goods;
+    private GoodsParser goodsParser;
 
     public Goods(String shoppingList) {
-        goods = new ArrayList<Good>();
-        for (String name : parseNames(shoppingList)) {
-            goods.add(GoodFactory.create(name));
-        }
+        goodsParser = new GoodsParser();
+        goods = goodsParser.generateGoods(shoppingList);
     }
 
-    public Goods() {
-        goods = new ArrayList<Good>();
+    public Goods(List<Good> goods) {
+        this.goods = goods;
     }
 
-    private ArrayList<String> parseNames(String shoppingList) {
-        ArrayList<String> names = new ArrayList<String>();
-        char[] chars = shoppingList.toCharArray();
-        for (char aChar : chars) {
-            names.add(String.valueOf(aChar));
-        }
-        return names;
-    }
-
-    public int getPrice() {
-        int totalPrice = 0;
+    public int getTotalPrice() {
+        int result = 0;
         for (Good good : goods) {
-            totalPrice += good.getPrice();
+            result += good.getPrice();
         }
-        return totalPrice;
-    }
-
-    public void addGood(Good good) {
-        goods.add(good);
-    }
-
-    public int count(Good goodNeedToCount) {
-        int count = 0;
-        for (Good good : goods) {
-            if (good.equals(goodNeedToCount)) {
-                count++;
-            }
-        }
-        return count;
+        return result;
     }
 
     public Goods copy() {
-        Goods copied = new Goods();
-        copied.goods = (ArrayList<Good>) goods.clone();
-        return copied;
+        return new Goods(this.goods);
+    }
+
+    public void add(Good good) {
+        goods.add(good);
+    }
+
+    public int occurrenceOf(Good goodNeedToCount) {
+        int occurrence = 0;
+        for (Good good : goods) {
+            if (good.equals(goodNeedToCount)) {
+                occurrence++;
+            }
+        }
+        return occurrence;
     }
 }

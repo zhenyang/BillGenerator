@@ -11,7 +11,7 @@ public class Good {
 
     @Override
     public boolean equals(Object o) {
-        Good good = (Good) o;
-        return price == good.getPrice();
+        Good compared = (Good) o;
+        return price == compared.getPrice();
     }
 }

@@ -1,5 +1,5 @@
 public class GoodFactory {
-    public static Good create(String name) {
+    public Good createGood(String name) {
         if (name.equals("A")) {
             return new Good(50);
         }
