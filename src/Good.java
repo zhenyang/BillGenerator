@@ -1,9 +1,7 @@
 public class Good {
     private int price;
-    private String name;
 
-    public Good(String name, int price) {
-        this.name = name;
+    public Good(int price) {
         this.price = price;
     }
 
@@ -11,8 +9,9 @@ public class Good {
         return price;
     }
 
-
-    public String getName() {
-        return name;
+    @Override
+    public boolean equals(Object o) {
+        Good good = (Good) o;
+        return price == good.getPrice();
     }
 }

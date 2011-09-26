@@ -46,7 +46,7 @@ public class BillGeneratorTest {
 
     @Test
     public void should_calculate_price_when_shopping_list_has_four_same_goods() throws Exception {
-        assertThat(billGenerator.calculateBill("AAAA"), equalTo(180));
+        assertThat(billGenerator.calculateBill("AAAAAA"), equalTo(260));
     }
 
     @Test

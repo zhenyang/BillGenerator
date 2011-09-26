@@ -1,50 +1,54 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Goods {
-    private List<Good> goods;
+
+    private ArrayList<Good> goods;
 
     public Goods(String shoppingList) {
         goods = new ArrayList<Good>();
-
-        List<String> names = new ShoppingList(shoppingList).toList();
-        for (String name : names) {
-            goods.add(create(name));
+        for (String name : parseNames(shoppingList)) {
+            goods.add(GoodFactory.create(name));
         }
     }
 
-    private Good create(String name) {
-        if (name.equals("A")) {
-            return new Good("A", 50);
+    public Goods() {
+        goods = new ArrayList<Good>();
+    }
+
+    private ArrayList<String> parseNames(String shoppingList) {
+        ArrayList<String> names = new ArrayList<String>();
+        char[] chars = shoppingList.toCharArray();
+        for (char aChar : chars) {
+            names.add(String.valueOf(aChar));
         }
-        if (name.equals("B")) {
-            return new Good("B", 30);
-        }
-        if (name.equals("C")) {
-            return new Good("C", 20);
-        }
-        return new Good("D", 15);
+        return names;
     }
 
     public int getPrice() {
-        int total = 0;
+        int totalPrice = 0;
         for (Good good : goods) {
-            total += good.getPrice();
+            totalPrice += good.getPrice();
         }
-        return total;
+        return totalPrice;
     }
 
-    public int countSpecificGood(String name) {
-        int count=0;
+    public void addGood(Good good) {
+        goods.add(good);
+    }
+
+    public int count(Good goodNeedToCount) {
+        int count = 0;
         for (Good good : goods) {
-            if(good.getName().equals(name)){
+            if (good.equals(goodNeedToCount)) {
                 count++;
             }
         }
         return count;
     }
 
-    public void addGood(String name, int price) {
-        goods.add(new Good(name, price));
+    public Goods copy() {
+        Goods copied = new Goods();
+        copied.goods = (ArrayList<Good>) goods.clone();
+        return copied;
     }
 }
